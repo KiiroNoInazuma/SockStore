@@ -9,7 +9,9 @@ import java.util.*;
 
 @Service
 public class SocksService implements IService {
-    Map<Socks, Integer> mapSocks;
+    Map<Socks, Integer> mapSocks = new HashMap<>();
+
+
     private int count;
 
     private Color transform(String color) {
@@ -71,6 +73,12 @@ public class SocksService implements IService {
                 .filter(c -> Objects.equals(c.cottonPart(), cotton)).findFirst().orElseThrow();
         return mapSocks.get(check);
     }
+@Override
+    public Map<Socks, Integer> getMapSocks() {
+        return mapSocks;
+    }
+
+
 }
 
 
