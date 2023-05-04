@@ -53,13 +53,20 @@ public class Service {
         count = count + quantity;
         mapSocks.put(socks, count);
     }
-    public void delSocks()
+
+    public void delSocks(Socks socks, int quantity) {
+        count = count - quantity;
+        mapSocks.put(socks, count);
+        if (count == 0) {
+            mapSocks.remove(socks);
+        }
+    }
 
     public int getQuantity(String color, int size, double cotton) {
         Socks check = mapSocks.keySet().stream()
                 .filter(a -> Objects.equals(a.color(), transform(color)))
-                .filter(b->Objects.equals(b.size(),transform(size)))
-                .filter(c->Objects.equals(c.cottonPart(), cotton)).findFirst().orElseThrow();
+                .filter(b -> Objects.equals(b.size(), transform(size)))
+                .filter(c -> Objects.equals(c.cottonPart(), cotton)).findFirst().orElseThrow();
         return mapSocks.get(check);
     }
 
@@ -68,6 +75,9 @@ public class Service {
         Socks socks = new Socks(service.transform("Синий"), service.transform(41), 95.5);
         service.addSocks(socks, 12);
         service.addSocks(socks, 12);
+        service.delSocks(socks,12);
+        service.delSocks(socks,12);
+        System.out.println(service.getQuantity("Синий", 41, 95.5));
 
 
     }
