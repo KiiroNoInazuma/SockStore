@@ -1,17 +1,16 @@
-package com.example.sockstore;
+package com.example.sockstore.service;
 
 import com.example.sockstore.model.Color;
 import com.example.sockstore.model.Size;
 import com.example.sockstore.model.Socks;
+import org.springframework.stereotype.Service;
 
 import java.util.*;
 
-public class Service {
-    Map<Socks, Integer> mapSocks = new HashMap<>();
+@Service
+public class SocksService implements IService {
+    Map<Socks, Integer> mapSocks;
     private int count;
-
-    public Service() {
-    }
 
     private Color transform(String color) {
         switch (color) {
@@ -49,11 +48,13 @@ public class Service {
         return null;
     }
 
+    @Override
     public void addSocks(Socks socks, int quantity) {
         count = count + quantity;
         mapSocks.put(socks, count);
     }
 
+    @Override
     public void delSocks(Socks socks, int quantity) {
         count = count - quantity;
         mapSocks.put(socks, count);
@@ -62,6 +63,7 @@ public class Service {
         }
     }
 
+    @Override
     public int getQuantity(String color, int size, double cotton) {
         Socks check = mapSocks.keySet().stream()
                 .filter(a -> Objects.equals(a.color(), transform(color)))
@@ -69,19 +71,6 @@ public class Service {
                 .filter(c -> Objects.equals(c.cottonPart(), cotton)).findFirst().orElseThrow();
         return mapSocks.get(check);
     }
-
-    public static void main(String[] args) {
-        Service service = new Service();
-        Socks socks = new Socks(service.transform("Синий"), service.transform(41), 95.5);
-        service.addSocks(socks, 12);
-        service.addSocks(socks, 12);
-        service.delSocks(socks,12);
-        service.delSocks(socks,12);
-        System.out.println(service.getQuantity("Синий", 41, 95.5));
-
-
-    }
-
-
 }
+
 
