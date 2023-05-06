@@ -9,7 +9,9 @@ public interface IService {
 
     void delSocks(Socks socks, int quantity);
 
-    int getQuantity(String color, int size, double cotton);
+    void delSocks(Socks socks);
+
+    Socks getQuantity(String color, int size, double cotton);
 
     Map<Socks, Integer> getMapSocks();
 }

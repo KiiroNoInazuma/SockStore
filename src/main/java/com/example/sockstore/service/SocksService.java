@@ -1,7 +1,4 @@
 package com.example.sockstore.service;
-
-import com.example.sockstore.model.Color;
-import com.example.sockstore.model.Size;
 import com.example.sockstore.model.Socks;
 import org.springframework.stereotype.Service;
 
@@ -14,51 +11,25 @@ public class SocksService implements IService {
 
     private int count;
 
-    private Color transform(String color) {
-        switch (color) {
-            case "Красный" -> {
-                return Color.RED;
-            }
-            case "Синий" -> {
-                return Color.BLUE;
-            }
-            case "Зеленый" -> {
-                return Color.GREEN;
-            }
-        }
-        return null;
-    }
 
-    private Size transform(int size) {
-        switch (size) {
-            case 39 -> {
-                return Size.A;
-            }
-            case 40 -> {
-                return Size.B;
-            }
-            case 41 -> {
-                return Size.C;
-            }
-            case 42 -> {
-                return Size.D;
-            }
-            case 43 -> {
-                return Size.E;
-            }
-        }
-        return null;
-    }
 
     @Override
     public void addSocks(Socks socks, int quantity) {
-        count = count + quantity;
+        count = quantity;
+        for (Socks check : mapSocks.keySet()) {
+            if (socks.equals(check)) count = mapSocks.get(socks) + quantity;
+        }
         mapSocks.put(socks, count);
+
     }
 
     @Override
     public void delSocks(Socks socks, int quantity) {
-        count = count - quantity;
+
+        count = quantity;
+        for (Socks check : mapSocks.keySet()) {
+            if (socks.equals(check)) count = mapSocks.get(socks) - quantity;
+        }
         mapSocks.put(socks, count);
         if (count == 0) {
             mapSocks.remove(socks);
@@ -66,19 +37,23 @@ public class SocksService implements IService {
     }
 
     @Override
-    public int getQuantity(String color, int size, double cotton) {
-        Socks check = mapSocks.keySet().stream()
-                .filter(a -> Objects.equals(a.color(), transform(color)))
-                .filter(b -> Objects.equals(b.size(), transform(size)))
-                .filter(c -> Objects.equals(c.cottonPart(), cotton)).findFirst().orElseThrow();
-        return mapSocks.get(check);
+    public void delSocks(Socks socks) {
+        mapSocks.remove(socks);
     }
-@Override
+
+    @Override
+    public Socks getQuantity(String color, int size, double cotton) {
+        return mapSocks.keySet().stream()
+                .filter(a -> Objects.equals(a.getColor(), color))
+                .filter(b -> Objects.equals(b.getSize(), size))
+                .filter(c -> Objects.equals(c.getCottonPart(), cotton)).findFirst().orElseThrow();
+    }
+
+    @Override
     public Map<Socks, Integer> getMapSocks() {
         return mapSocks;
     }
-
-
 }
+
 
 
