@@ -1,5 +1,6 @@
 package com.example.sockstore.service;
 import com.example.sockstore.model.Socks;
+import com.example.sockstore.param.TransSoft;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
@@ -44,8 +45,8 @@ public class SocksService implements IService {
     @Override
     public Socks getQuantity(String color, int size, double cotton) {
         return mapSocks.keySet().stream()
-                .filter(a -> Objects.equals(a.getColor(), color))
-                .filter(b -> Objects.equals(b.getSize(), size))
+                .filter(a -> Objects.equals(a.getColor(), TransSoft.transform(color)))
+                .filter(b -> Objects.equals(b.getSize(), TransSoft.transform(size)))
                 .filter(c -> Objects.equals(c.getCottonPart(), cotton)).findFirst().orElseThrow();
     }
 
