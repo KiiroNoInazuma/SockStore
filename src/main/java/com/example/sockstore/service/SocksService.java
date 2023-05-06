@@ -3,7 +3,6 @@ package com.example.sockstore.service;
 import com.example.sockstore.model.Color;
 import com.example.sockstore.model.Size;
 import com.example.sockstore.model.Socks;
-import com.example.sockstore.param.TransSoft;
 import org.springframework.stereotype.Service;
 
 import java.util.*;

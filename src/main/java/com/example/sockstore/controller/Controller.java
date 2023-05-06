@@ -1,7 +1,6 @@
 package com.example.sockstore.controller;
 
 import com.example.sockstore.model.Socks;
-import com.example.sockstore.param.TransSoft;
 import com.example.sockstore.service.IService;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
