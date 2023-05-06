@@ -16,10 +16,10 @@ public class Controller {
 
 
     @GetMapping
-    public int getCountSocks(@RequestBody Socks socks){
-        return iService.getMapSocks().get(iService.getQuantity(socks.getColor(), socks.getSize(), socks.getCottonPart()));
+    public String getCountSocks(@RequestBody Socks socks) {
+        return "Требуемых носков на складе - "
+                + iService.getMapSocks().get(iService.getQuantity(socks.getColor(), socks.getSize(), socks.getCottonPart())) + " шт.";
     }
-
 
 
     @PostMapping
