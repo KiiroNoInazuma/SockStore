@@ -86,11 +86,6 @@ public class SocksService implements IService {
     }
 
     @Override
-    public void getMapSocks(Map<Socks, Integer> back) {
-        mapSocks = back;
-    }
-
-    @Override
     public String up(MultipartFile fileUp) throws IOException {
         File file = new File("test.json");
         if (!file.exists()) {

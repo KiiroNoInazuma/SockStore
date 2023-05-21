@@ -17,7 +17,5 @@ public interface IService {
 
     Map<Socks, Integer> getMapSocks();
 
-    void getMapSocks(Map<Socks, Integer> back);
-
     String up(MultipartFile fileUp) throws IOException;
 }
