@@ -1,21 +1,23 @@
 package com.example.sockstore.service;
 
-import com.example.sockstore.model.Color;
-import com.example.sockstore.model.Size;
 import com.example.sockstore.model.Socks;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.Map;
 
 public interface IService {
-    void addSocks(Socks socks, int quantity);
+    String addSocks(Socks socks, int quantity) throws IOException;
 
     int delSocks(Socks socks, int quantity);
 
-    void delSocks(Socks socks);
+    String delSocks(Socks socks);
 
-    Socks getQuantity(Color color, Size size, double cotton);
+    Socks getQuantity(String color, int size, int cottonPart);
 
     Map<Socks, Integer> getMapSocks();
 
     void getMapSocks(Map<Socks, Integer> back);
+
+    String up(MultipartFile fileUp) throws IOException;
 }

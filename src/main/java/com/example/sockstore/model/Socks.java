@@ -1,52 +1,70 @@
 package com.example.sockstore.model;
 
-import lombok.Data;
 
-@Data
-public class Socks {
-    Color color;
-    Size size;
-    double cottonPart;
-
-    public Socks(String color, int size, double cottonPart) {
-        this.color = transform(color);
-        this.size = transform(size);
-        this.cottonPart = cottonPart;
+public record Socks(String color, int size, int cottonPart) {
+    public Socks {
+        color = checkColor(color);
+        size = checkSize(size);
+        if (cottonPart < 0 || cottonPart > 100) {
+            throw new RuntimeException("Значение переменной в недопустимом диапазоне");
+        }
     }
 
-    private Color transform(String color) {
+    public static String checkColor(String color) {
         switch (color) {
-            case "Красный" -> {
-                return Color.RED;
+            case "Красные" -> {
+                return Color.RED.toString();
             }
-            case "Синий" -> {
-                return Color.BLUE;
+            case "Синии" -> {
+                return Color.BLUE.toString();
             }
-            case "Зеленый" -> {
-                return Color.GREEN;
+            case "Зеленые" -> {
+                return Color.GREEN.toString();
             }
         }
         return null;
     }
 
-    private Size transform(int size) {
+    public static String transform(Socks socks) {
+        switch (socks.color) {
+            case "Красные" -> {
+                return " 🔴";
+            }
+            case "Синии" -> {
+                return "🔵";
+            }
+            case "Зеленые" -> {
+                return "🟢";
+            }
+        }
+        return null;
+    }
+
+    public static int checkSize(int size) {
         switch (size) {
             case 39 -> {
-                return Size.A;
+                return Integer.parseInt(Size.A.toString());
             }
             case 40 -> {
-                return Size.B;
+                return Integer.parseInt(Size.B.toString());
             }
             case 41 -> {
-                return Size.C;
+                return Integer.parseInt(Size.C.toString());
             }
             case 42 -> {
-                return Size.D;
+                return Integer.parseInt(Size.D.toString());
             }
             case 43 -> {
-                return Size.E;
+                return Integer.parseInt(Size.E.toString());
             }
         }
-        return null;
+        return 0;
     }
+
+    @Override
+    public String toString() {
+        return "\uD83E\uDDE6 Носки ➡ " + color + "; Размер - " + size + "; Хлопок - " + cottonPart + '%';
+    }
+
+
 }
