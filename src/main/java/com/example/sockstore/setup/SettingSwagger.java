@@ -19,7 +19,7 @@ import java.io.IOException;
 
 
 @Tag(name = "Операции на складе")
-@OpenAPIDefinition(info = @Info(title = "Склад носков \uD83E\uDDE6", version = "Версия 1.0"),
+@OpenAPIDefinition(info = @Info(title = "Склад носков \uD83E\uDDE6", version = "Версия 1.3"),
         servers = @Server(description = "Сервер склада носков", url = "http://127.0.0.1:8080"))
 public interface SettingSwagger {
 
